@@ -89,3 +89,11 @@ function validate_required(array $fields, array $data): array
     }
     return $errors;
 }
+
+/**
+ * Global translation helper
+ */
+function __(string $key, string $default = ''): string
+{
+    return \App\Locale::t($key, $default);
+}

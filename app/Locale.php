@@ -260,10 +260,3 @@ class Locale
     }
 }
 
-/**
- * Global translation helper
- */
-function __(string $key, string $default = ''): string
-{
-    return \App\Locale::t($key, $default);
-}
