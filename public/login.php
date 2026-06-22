@@ -171,6 +171,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background: #667eea;
             color: white;
         }
+
+        .version-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+        .version-footer .version {
+            font-family: 'Courier New', monospace;
+            font-weight: 600;
+            color: #495057;
+            letter-spacing: 0.5px;
+        }
+
+        .version-footer .by-yellowweb {
+            margin-top: 4px;
+        }
+
+        .version-footer a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .version-footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -207,11 +235,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </button>
         </form>
 
-        <div class="info-box">
-            <strong>🛡️ <?= __("login_info_title") ?></strong><br>
-            • <?= __("login_info_3") ?><br>
-            • <?= __("login_info_5") ?><br>
-            • <?= __("login_info_7") ?>
+        <div class="version-footer">
+            <div class="version">23062025b13</div>
+            <div class="by-yellowweb">by <a href="https://yellowweb.top" target="_blank">Yellow Web</a></div>
         </div>
     </div>
 </body>
