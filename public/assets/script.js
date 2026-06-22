@@ -66,7 +66,7 @@ function renderBots() {
     const tbody = document.getElementById('bots-tbody');
     
     if (bots.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" class="loading">Нет ботов. Добавьте первого!</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="loading">t("no_bots")</td></tr>';
         return;
     }
     
@@ -241,7 +241,7 @@ function renderChannels() {
     const tbody = document.getElementById('channels-tbody');
     
     if (channels.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" class="loading">Нет каналов. Добавьте первый!</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="loading">t("no_channels")</td></tr>';
         return;
     }
     
