@@ -1,0 +1,39 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Admin Panel",
+            "type": "php",
+            "request": "launch",
+            "runtimeArgs": [
+                "-S",
+                "localhost:8080",
+                "-t",
+                "${workspaceFolder}/public"
+            ],
+            "port": 9003
+        },
+        {
+            "name": "Run Setup",
+            "type": "php",
+            "request": "launch",
+            "program": "${workspaceFolder}/setup.php",
+            "cwd": "${workspaceFolder}",
+            "runtimeArgs": [],
+            "env": {
+                "XDEBUG_CONFIG": "idekey=VSCODE"
+            }
+        },
+        {
+            "name": "Run Tests",
+            "type": "php",
+            "request": "launch",
+            "program": "${workspaceFolder}/test.php",
+            "cwd": "${workspaceFolder}",
+            "runtimeArgs": [],
+            "env": {
+                "XDEBUG_CONFIG": "idekey=VSCODE"
+            }
+        }
+    ]
+}
