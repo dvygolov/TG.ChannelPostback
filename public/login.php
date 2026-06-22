@@ -19,11 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 ?>
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="<?= \App\Locale::getLang() ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Вход - Telegram Channel Postback</title>
+    <title><?= __("login_title") ?></title>
     <style>
         * {
             margin: 0;
@@ -144,7 +144,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-container">
         <div class="login-header">
             <div class="icon">🔐</div>
-            <h1>Вход в систему</h1>
+            <h1><?= __("login_h1") ?></h1>
             <p>Telegram Channel Postback</p>
         </div>
 
@@ -156,25 +156,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <form method="POST" action="">
             <div class="form-group">
-                <label for="password">Пароль</label>
+                <label for="password"><?= __("login_password") ?></label>
                 <input type="password" 
                        id="password" 
                        name="password" 
                        required 
                        autofocus
-                       placeholder="Введите пароль">
+                       placeholder="<?= __("login_placeholder") ?>">
             </div>
 
             <button type="submit" class="btn-login">
-                Войти
+                <?= __("login_btn") ?>
             </button>
         </form>
 
         <div class="info-box">
-            <strong>🛡️ Защита от перебора:</strong><br>
-            • 3 попытки — таймаут 5 минут<br>
-            • 5 попыток — таймаут 15 минут<br>
-            • 7 попыток — таймаут 1 час
+            <strong>🛡️ <?= __("login_info_title") ?></strong><br>
+            • <?= __("login_info_3") ?><br>
+            • <?= __("login_info_5") ?><br>
+            • <?= __("login_info_7") ?>
         </div>
     </div>
 </body>

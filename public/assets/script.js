@@ -58,7 +58,7 @@ async function loadBots() {
         }
     } catch (error) {
         console.error('Failed to load bots:', error);
-        showError('Ошибка загрузки ботов');
+        showError(t("error_load_bots"));
     }
 }
 
@@ -76,7 +76,7 @@ function renderBots() {
             <td><strong>${escapeHtml(bot.name)}</strong></td>
             <td>
                 <span class="status-badge ${bot.is_active ? 'status-active' : 'status-inactive'}">
-                    ${bot.is_active ? 'Активен' : 'Неактивен'}
+                    ${bot.is_active ? t("status_active") : t("status_inactive")}
                 </span>
             </td>
             <td>${formatDate(bot.created_at)}</td>
@@ -88,7 +88,7 @@ function renderBots() {
                 </button>
                 <button class="btn-icon ${bot.is_active ? 'btn-secondary' : 'btn-success'}" 
                         onclick="toggleBot(${bot.id})"
-                        title="${bot.is_active ? 'Деактивировать' : 'Активировать'}">
+                        title="${bot.is_active ? t("title_deactivate") : t("title_activate")}">
                     <span class="icon">${bot.is_active ? '⏸' : '▶'}</span>
                 </button>
                 <button class="btn-icon btn-danger" 
@@ -120,20 +120,20 @@ async function addBot(event) {
         const data = await response.json();
         
         if (data.success) {
-            showSuccess('Бот успешно добавлен!');
+            showSuccess(t("success_bot_added"));
             closeModal('modal-add-bot');
             form.reset();
             loadBots();
         } else {
-            showError(data.error || 'Ошибка при добавлении бота');
+            showError(data.error || t("error_add_bot"));
         }
     } catch (error) {
-        showError('Ошибка при добавлении бота');
+        showError(t("error_add_bot"));
     }
 }
 
 async function toggleBot(id) {
-    if (!confirm('Изменить статус бота?')) return;
+    if (!confirm(t("confirm_toggle_bot"))) return;
     
     const formData = new FormData();
     formData.append('id', id);
@@ -150,15 +150,15 @@ async function toggleBot(id) {
             showSuccess('Статус бота обновлён');
             loadBots();
         } else {
-            showError(data.error || 'Ошибка');
+            showError(data.error || t("error_generic"));
         }
     } catch (error) {
-        showError('Ошибка при обновлении');
+        showError(t("error_generic"));
     }
 }
 
 async function deleteBot(id, name) {
-    if (!confirm(`Удалить бота "${name}"?\n\nБудут удалены все связанные каналы и инвайты!`)) return;
+    if (!confirm(`t("confirm_delete_bot")`)) return;
     
     const formData = new FormData();
     formData.append('id', id);
@@ -176,10 +176,10 @@ async function deleteBot(id, name) {
             loadBots();
             loadChannels();
         } else {
-            showError(data.error || 'Ошибка при удалении');
+            showError(data.error || t("error_delete"));
         }
     } catch (error) {
-        showError('Ошибка при удалении');
+        showError(t("error_delete"));
     }
 }
 
@@ -214,10 +214,10 @@ async function updateBot(event) {
             form.reset();
             loadBots();
         } else {
-            showError(data.error || 'Ошибка при обновлении бота');
+            showError(data.error || t("error_update_bot"));
         }
     } catch (error) {
-        showError('Ошибка при обновлении бота');
+        showError(t("error_update_bot"));
     }
 }
 
@@ -233,7 +233,7 @@ async function loadChannels() {
         }
     } catch (error) {
         console.error('Failed to load channels:', error);
-        showError('Ошибка загрузки каналов');
+        showError(t("error_load_channels"));
     }
 }
 
@@ -247,7 +247,7 @@ function renderChannels() {
     
     tbody.innerHTML = channels.map(channel => {
         const bot = bots.find(b => b.id === channel.bot_id);
-        const botName = bot ? bot.name : 'Unknown';
+        const botName = bot ? bot.name : t("unknown");
         
         return `
             <tr>
@@ -260,7 +260,7 @@ function renderChannels() {
                 <td>${escapeHtml(botName)}</td>
                 <td>
                     <span class="status-badge ${channel.is_active ? 'status-active' : 'status-inactive'}">
-                        ${channel.is_active ? 'Активен' : 'Неактивен'}
+                        ${channel.is_active ? t("status_active") : t("status_inactive")}
                     </span>
                 </td>
                 <td>
@@ -276,7 +276,7 @@ function renderChannels() {
                     </button>
                     <button class="btn-icon ${channel.is_active ? 'btn-secondary' : 'btn-success'}" 
                             onclick="toggleChannel(${channel.id})"
-                            title="${channel.is_active ? 'Деактивировать' : 'Активировать'}">
+                            title="${channel.is_active ? t("title_deactivate") : t("title_activate")}">
                         <span class="icon">${channel.is_active ? '⏸' : '▶'}</span>
                     </button>
                     <button class="btn-icon btn-danger" 
@@ -292,7 +292,7 @@ function renderChannels() {
 
 function showAddChannelModal() {
     if (bots.length === 0) {
-        showError('Сначала добавьте хотя бы одного бота!');
+        showError(t("error_add_bot_first"));
         return;
     }
     
@@ -316,7 +316,7 @@ async function addChannel(event) {
     
     const submitBtn = form.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Проверка...';
+    submitBtn.textContent = t("check");
     
     try {
         const response = await fetch('api.php?action=add_channel', {
@@ -327,15 +327,15 @@ async function addChannel(event) {
         const data = await response.json();
         
         if (data.success) {
-            showSuccess('Канал успешно добавлен!');
+            showSuccess(t("success_channel_added"));
             closeModal('modal-add-channel');
             form.reset();
             loadChannels();
         } else {
-            showError(data.error || 'Ошибка при добавлении канала');
+            showError(data.error || t("error_add_channel"));
         }
     } catch (error) {
-        showError('Ошибка при добавлении канала');
+        showError(t("error_add_channel"));
     } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Добавить';
@@ -343,7 +343,7 @@ async function addChannel(event) {
 }
 
 async function toggleChannel(id) {
-    if (!confirm('Изменить статус канала?')) return;
+    if (!confirm(t("confirm_toggle_channel"))) return;
     
     const formData = new FormData();
     formData.append('id', id);
@@ -360,15 +360,15 @@ async function toggleChannel(id) {
             showSuccess('Статус канала обновлён');
             loadChannels();
         } else {
-            showError(data.error || 'Ошибка');
+            showError(data.error || t("error_generic"));
         }
     } catch (error) {
-        showError('Ошибка при обновлении');
+        showError(t("error_generic"));
     }
 }
 
 async function deleteChannel(id) {
-    if (!confirm('Удалить канал?\n\nБудут удалены все связанные инвайты!')) return;
+    if (!confirm(t("confirm_delete_channel"))) return;
     
     const formData = new FormData();
     formData.append('id', id);
@@ -385,10 +385,10 @@ async function deleteChannel(id) {
             showSuccess('Канал удалён');
             loadChannels();
         } else {
-            showError(data.error || 'Ошибка при удалении');
+            showError(data.error || t("error_delete"));
         }
     } catch (error) {
-        showError('Ошибка при удалении');
+        showError(t("error_delete"));
     }
 }
 
@@ -424,10 +424,10 @@ async function updateChannel(event) {
             form.reset();
             loadChannels();
         } else {
-            showError(data.error || 'Ошибка при обновлении канала');
+            showError(data.error || t("error_update_channel"));
         }
     } catch (error) {
-        showError('Ошибка при обновлении канала');
+        showError(t("error_update_channel"));
     }
 }
 
@@ -457,7 +457,7 @@ function escapeHtml(text) {
 
 function formatDate(dateString) {
     const date = new Date(dateString);
-    return date.toLocaleString('ru-RU');
+    return date.toLocaleString(currentLang === 'ru' ? 'ru-RU' : 'en-US');
 }
 
 function showSuccess(message) {
@@ -477,7 +477,7 @@ function copySubscribeLink(channelId) {
     // Copy to clipboard
     navigator.clipboard.writeText(subscribeUrl).then(() => {
         // Show success tooltip
-        showSuccess('Ссылка скопирована в буфер обмена!\n\n' + subscribeUrl);
+        showSuccess(t("success_link_copied") + "\n\n" + subscribeUrl);
     }).catch(err => {
         // Fallback for older browsers
         const textarea = document.createElement('textarea');
@@ -488,9 +488,9 @@ function copySubscribeLink(channelId) {
         textarea.select();
         try {
             document.execCommand('copy');
-            showSuccess('Ссылка скопирована в буфер обмена!\n\n' + subscribeUrl);
+            showSuccess(t("success_link_copied") + "\n\n" + subscribeUrl);
         } catch (e) {
-            showError('Не удалось скопировать ссылку');
+            showError(t("error_link_copy"));
         }
         document.body.removeChild(textarea);
     });

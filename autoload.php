@@ -32,3 +32,6 @@ spl_autoload_register(function ($class) {
 
 // Load helpers
 require_once __DIR__ . '/app/helpers.php';
+
+// Initialize locale
+\App\Locale::init();

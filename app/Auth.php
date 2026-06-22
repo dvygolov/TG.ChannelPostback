@@ -82,7 +82,7 @@ class Auth
             
             return [
                 'success' => false,
-                'error' => 'Неверный пароль'
+                'error' => __("error_wrong_password")
             ];
         }
     }
