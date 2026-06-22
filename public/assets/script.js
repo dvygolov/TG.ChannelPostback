@@ -158,7 +158,7 @@ async function toggleBot(id) {
 }
 
 async function deleteBot(id, name) {
-    if (!confirm(`t("confirm_delete_bot")`)) return;
+    if (!confirm(`${t("confirm_delete_bot")}`)) return;
     
     const formData = new FormData();
     formData.append('id', id);
