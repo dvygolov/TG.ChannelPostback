@@ -40,9 +40,6 @@ header h1 {
 }
 
 .btn-logout {
-    position: absolute;
-    top: 0;
-    right: 0;
     padding: 8px 16px;
     background: #dc3545;
     color: white;
