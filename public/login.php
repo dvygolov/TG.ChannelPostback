@@ -138,6 +138,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .info-box strong {
             color: #495057;
         }
+
+        .lang-switcher {
+            display: flex;
+            gap: 4px;
+            justify-content: center;
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 4px;
+            border: 1px solid #e9ecef;
+        }
+
+        .lang-btn {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #6c757d;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+        }
+
+        .lang-btn:hover {
+            color: #667eea;
+            background: white;
+        }
+
+        .lang-btn.active {
+            background: #667eea;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -146,6 +179,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="icon">🔐</div>
             <h1><?= __("login_h1") ?></h1>
             <p>Telegram Channel Postback</p>
+            <div class="lang-switcher" style="margin-top: 15px;">
+                <a href="?lang=ru" class="lang-btn <?= \App\Locale::getLang() === 'ru' ? 'active' : '' ?>" data-lang="ru"><?= __("lang_ru") ?></a>
+                <a href="?lang=en" class="lang-btn <?= \App\Locale::getLang() === 'en' ? 'active' : '' ?>" data-lang="en"><?= __("lang_en") ?></a>
+            </div>
         </div>
 
         <?php if (isset($error)): ?>
